@@ -1,0 +1,34 @@
+import { pool, postgresConnect } from "@/utils/db";
+import { ensureExistDb } from "@/utils/ensure";
+import { NextResponse } from "next/server";
+
+export const POST = async (req: Request) => {
+    // const { name, actual_price, discount_price, rating = 0, review_customer_count = 0, favorite = false, discount = 0, category, best_seller = false, image = "" } = await req.json();
+    const formData = await req.formData();
+    const name = formData.get("name");
+    const actual_price = formData.get("actual_price");
+    const discount_price = formData.get("discount_price");
+    const rating = formData.get("rating");
+    const review_customer_count = formData.get("review_customer_count") ?? 0;
+    const favorite = formData.get("favorite");
+    const discount = formData.get("discount_percentage");
+    const category = formData.get("category");
+    const best_seller = formData.get("best_seller");
+    const image = formData.getAll("image[]") ?? [];
+    try {
+        await postgresConnect()
+        await ensureExistDb();
+        await pool.query(`INSERT INTO akstore.productlist ( name, actual_price, discount_price, rating, review_customer_count, favorite, discount, category,  best_seller, image ) 
+        VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+            [name, actual_price, discount_price, rating, review_customer_count, favorite, discount, category, best_seller, image]);
+
+        // if (true) {
+            const res = await pool.query(`SELECT * FROM akstore.productlist`)
+            return NextResponse.json({ data: res.rows.length > 0 ? res.rows : [], message: "successfully fetch" })
+        // }
+        // return NextResponse.json({data:image,  message: "successfully fetch" })
+    } catch (error) {
+        return NextResponse.json({ message: (error as Error).message, data: name })
+    }
+}
+
