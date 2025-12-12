@@ -1,5 +1,5 @@
 import { pool, postgresConnect } from "@/utils/db";
-import { ensureExistDb } from "@/utils/ensure";
+import { ensureExistDb, ensureProductImages, ensureProductListTable } from "@/utils/ensure";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
@@ -18,13 +18,27 @@ export const POST = async (req: Request) => {
     try {
         await postgresConnect()
         await ensureExistDb();
-        await pool.query(`INSERT INTO akstore.productlist ( name, actual_price, discount_price, rating, review_customer_count, favorite, discount, category,  best_seller, image ) 
-        VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
-            [name, actual_price, discount_price, rating, review_customer_count, favorite, discount, category, best_seller, image]);
-
+        await ensureProductListTable();
+        await ensureProductImages();
+        // 1️⃣ Insert product and get its ID
+        const productResult = await pool.query(`INSERT INTO akstore.productlist ( name, actual_price, discount_price, rating, review_customer_count, favorite, discount, category,  best_seller ) 
+        VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+            [name, actual_price, discount_price, rating, review_customer_count, favorite, discount, category, best_seller]);
+        const product_id = productResult.rows[0].id;
+        // 2️⃣ Insert images
+        const images=await pool.query(
+            `INSERT INTO akstore.productimagelist (product_id, name, images) 
+            VALUES ($1, $2, $3) RETURNING *`,
+            [product_id, name, image]
+        );
         // if (true) {
-            const res = await pool.query(`SELECT * FROM akstore.productlist`)
-            return NextResponse.json({ data: res.rows.length > 0 ? res.rows : [], message: "successfully fetch" })
+        // const res = await pool.query(`SELECT * FROM akstore.productlist`)
+        return NextResponse.json({
+            data: {
+                ...productResult.rows[0],
+                ...images.rows[0]
+            }, message: "successfully created"
+        });
         // }
         // return NextResponse.json({data:image,  message: "successfully fetch" })
     } catch (error) {

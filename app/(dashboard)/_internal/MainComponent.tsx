@@ -4,6 +4,7 @@ import Image from "next/image";
 
 async function MainComponent() {
   const { data: productList } = await getProductsList();
+  console.log("productLisst",productList)
   return (
     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {productList && productList.map((product: any) => {
@@ -20,8 +21,8 @@ async function MainComponent() {
           </p>
           <span>
             {product.favorite ?
-              <Image className="absolute top-8 right-4 bg-white rounded-lg" src={"/wishlist-favorite.svg"} alt="No image" width={25} height={25} /> :
-              <Image className="absolute top-8 right-4 bg-white rounded-lg" src={"/Wishlist.svg"} alt="No image" width={25} height={25} />}
+              <Image className="absolute top-8 right-4 bg-white rounded-lg w-10 h-auto" src="/wishlist-favorite.svg" alt="No image" width={25} height={25} /> :
+              <Image className="absolute top-8 right-4 bg-white rounded-lg w-10 h-auto" src="/Wishlist.svg" alt="No image" width={25} height={25} />}
           </span>
           <span className=" absolute bg-[#DB4444]  text-white px-4 py-1 top-8 left-4 rounded-sm">-{Math.round(product.discount)} {"%"}</span>
           <span>

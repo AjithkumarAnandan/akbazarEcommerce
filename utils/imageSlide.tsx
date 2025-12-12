@@ -3,7 +3,7 @@ import { useState } from "react";
 
 interface Product {
   name: string;
-  image?: string[];
+  images?: string[];
 }
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 export default function ImageSlider({ product }: Props) {
   const [activeIndex, setActiveIndex] = useState(0); // client state
 
-  if (!product.image || product.image.length === 0) {
+  if (!product.images || product.images.length === 0) {
     return (
       <div className="w-64 h-64 flex items-center justify-center bg-[#F5F5F5] text-gray-600 rounded-md mb-4">
         No Image
@@ -24,7 +24,7 @@ export default function ImageSlider({ product }: Props) {
   return (
     <div className="flex flex-col items-center">
       <div className="relative w-64 h-64 mb-2">
-        {product.image.map((img, index) => (
+        {product.images.map((img, index) => (
           <img
             key={index}
             src={img}
@@ -37,7 +37,7 @@ export default function ImageSlider({ product }: Props) {
       </div>
 
       <div className="flex space-x-2">
-        {product.image.map((_, index) => (
+        {product.images.map((_, index) => (
           <button
             key={index}
             onClick={() => setActiveIndex(index)}

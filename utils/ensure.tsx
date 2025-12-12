@@ -17,10 +17,21 @@ export const ensureProductListTable=async()=>{
   discount NUMERIC(5,2),
   category VARCHAR(255),
   best_seller BOOLEAN DEFAULT FALSE,
-  image TEXT[],
   created_at TIMESTAMP DEFAULT NOW()
 );`);
 }
+  // image TEXT[],
+
+export const ensureProductImages=async()=>{
+    await pool.query(`CREATE TABLE IF NOT EXISTS akstore.productimagelist (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  product_id INTEGER NOT NULL REFERENCES akstore.productlist(id) ON DELETE CASCADE,
+  images TEXT[],
+  created_at TIMESTAMP DEFAULT NOW()
+);`)
+}
+
 
 export const ensureProductReviews=async()=>{
     await pool.query(`CREATE TABLE IF NOT EXISTS akstore.product_reviews (
