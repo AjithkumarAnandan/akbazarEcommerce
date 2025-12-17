@@ -1,11 +1,12 @@
 import { pool } from "./db";
+import { postgresConnect } from "@/utils/db";
 
 
-export const ensureExistDb = async () => {
+ const ensureExistDb = async () => {
     await pool.query(`CREATE SCHEMA IF NOT EXISTS akstore`);     
 };
 
-export const ensureProductListTable=async()=>{
+ const ensureProductListTable=async()=>{
     await pool.query(`CREATE TABLE IF NOT EXISTS akstore.productlist (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -22,7 +23,7 @@ export const ensureProductListTable=async()=>{
 }
   // image TEXT[],
 
-export const ensureProductImages=async()=>{
+ const ensureProductImages=async()=>{
     await pool.query(`CREATE TABLE IF NOT EXISTS akstore.productimagelist (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -33,7 +34,7 @@ export const ensureProductImages=async()=>{
 }
 
 
-export const ensureProductReviews=async()=>{
+ const ensureProductReviews=async()=>{
     await pool.query(`CREATE TABLE IF NOT EXISTS akstore.product_reviews (
   id SERIAL PRIMARY KEY,
   product_id INTEGER NOT NULL REFERENCES akstore.productlist(id) ON DELETE CASCADE,
@@ -44,3 +45,6 @@ export const ensureProductReviews=async()=>{
   created_at TIMESTAMP DEFAULT NOW()
 );`)
 }
+
+ const ensureDB={ensureExistDb,ensureProductImages,ensureProductListTable,ensureProductReviews,postgresConnect};
+ export default ensureDB;

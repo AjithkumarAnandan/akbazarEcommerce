@@ -1,12 +1,15 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Header() {
     return (
             <div className='flex justify-between items-center items-evenly  space-x-8 h-[5rem] '>
-                <h1 className='text-xl font-[800]'><span className='text-red-500 '>AK</span><span className='text-blue-500 '>BAZAR</span></h1>
+              <Link href={'/'}>
+               <h1 className='text-xl font-[800]'><span className='text-red-500 '>AK</span><span className='text-blue-500 '>BAZAR</span></h1>
+              </Link> 
                 <ul className='flex gap-4 text-base space-x-2'>
-                    <li>Home</li>
-                    <li>Contact</li>
+                    <li><Link href={"/"}>Home</Link></li>
+                    <li><Link href={"/contact"}>Contact</Link></li>
                     <li>About</li>
                     <li className='flex whitespace-nowrap'>Sign Up</li>
                 </ul>

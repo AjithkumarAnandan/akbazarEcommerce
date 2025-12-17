@@ -1,5 +1,5 @@
 import { pool, postgresConnect } from "@/utils/db";
-import { ensureExistDb, ensureProductImages, ensureProductListTable } from "@/utils/ensure";
+import ensureDB from "@/utils/ensure";
 import { NextResponse } from "next/server";
 
 export const POST = async (req: Request) => {
@@ -14,16 +14,18 @@ export const POST = async (req: Request) => {
     const discount = formData.get("discount_percentage");
     const category = formData.get("category");
     const best_seller = formData.get("best_seller");
+    const description = formData.get("description");
     const image = formData.getAll("image[]") ?? [];
     try {
-        await postgresConnect()
-        await ensureExistDb();
-        await ensureProductListTable();
-        await ensureProductImages();
+        await ensureDB.postgresConnect()
+        await ensureDB.ensureExistDb();
+        await ensureDB.ensureProductListTable();
+        await ensureDB.ensureProductImages();
+        //  await pool.query( `ALTER TABLE akstore.productlist ADD COLUMN description TEXT;`)
         // 1️⃣ Insert product and get its ID
-        const productResult = await pool.query(`INSERT INTO akstore.productlist ( name, actual_price, discount_price, rating, review_customer_count, favorite, discount, category,  best_seller ) 
-        VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
-            [name, actual_price, discount_price, rating, review_customer_count, favorite, discount, category, best_seller]);
+        const productResult = await pool.query(`INSERT INTO akstore.productlist ( name, actual_price, discount_price, rating, review_customer_count, favorite, discount, category,  best_seller, description ) 
+        VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+            [name, actual_price, discount_price, rating, review_customer_count, favorite, discount, category, best_seller,description]);
         const product_id = productResult.rows[0].id;
         // 2️⃣ Insert images
         const images=await pool.query(

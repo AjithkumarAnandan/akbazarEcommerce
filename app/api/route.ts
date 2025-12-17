@@ -1,13 +1,13 @@
 
-import { pool, postgresConnect } from "@/utils/db";
-import { ensureExistDb, ensureProductListTable } from "@/utils/ensure";
+import { pool } from "@/utils/db";
+import ensureDB from "@/utils/ensure";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
     try {
-        await postgresConnect()
-        await ensureExistDb();
-        await ensureProductListTable();
+        await ensureDB.postgresConnect()
+        await ensureDB.ensureExistDb();
+        await ensureDB.ensureProductListTable();
         const existingList = await pool.query(`SELECT 
     p.*,
     COALESCE(

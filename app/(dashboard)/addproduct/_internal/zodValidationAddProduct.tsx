@@ -23,4 +23,5 @@ export const productSchema = z.object({
 //  image: z.instanceof(File, { message: "Image is required" }).optional(), // File input
   favorite: z.boolean().optional(),
   best_seller: z.boolean().optional(),
+  description:z.string().min(1, "Description is required")
 });

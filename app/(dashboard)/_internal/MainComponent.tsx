@@ -1,40 +1,42 @@
 import { getProductsList } from "@/component/getProductsList";
-import ImageSlider from "@/utils/imageSlide";
+import { ImageSlider } from "@/utils/imageSlide";
 import Image from "next/image";
+import Link from "next/link";
 
 async function MainComponent() {
   const { data: productList } = await getProductsList();
-  console.log("productLisst",productList)
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {productList && productList.map((product: any) => {
-        return <div key={product.id} className="border-0 rounded-lg m-4 p-4 shadow-md flex flex-col items-center w-64 relative">
-          <ImageSlider product={product} />
-          <h1 className="font-semibold text-lg text-center mb-2">{product.name}</h1>
-          <p className="flex gap-2 items-center">
-            <span className="underline text-red-600 font-semibold">
-              ${product.discount_price}
-            </span>
-            <span className="line-through text-gray-500">
-              ${product.actual_price}
-            </span>
-          </p>
-          <span>
-            {product.favorite ?
-              <Image className="absolute top-8 right-4 bg-white rounded-lg w-10 h-auto" src="/wishlist-favorite.svg" alt="No image" width={25} height={25} /> :
-              <Image className="absolute top-8 right-4 bg-white rounded-lg w-10 h-auto" src="/Wishlist.svg" alt="No image" width={25} height={25} />}
+      {productList && productList.map((product: any) => <div key={product.id} className="border-0 rounded-lg m-4 p-4 shadow-md flex flex-col items-center relative">
+        {product && <ImageSlider product={product} />}
+        <span>
+          {product.favorite ?
+            <Image className="absolute top-8 right-4 bg-white rounded-lg w-10 h-auto" src="/wishlist-favorite.svg" alt="No image" width={25} height={25} /> :
+            <Image className="absolute top-8 right-4 bg-white rounded-lg w-10 h-auto" src="/Wishlist.svg" alt="No image" width={25} height={25} />}
+        </span>
+        <Link href={`/selected-product/${btoa(product.id)}`}>
+          <h1 className="font-semibold text-lg text-center mb-2">{product.name.slice(0, 20)}...</h1>
+        </Link>
+        <p className="flex gap-2 items-center">
+          <span className="underline text-red-600 font-semibold">
+            ${product.discount_price}
           </span>
-          <span className=" absolute bg-[#DB4444]  text-white px-4 py-1 top-8 left-4 rounded-sm">-{Math.round(product.discount)} {"%"}</span>
-          <span>
-            {[...Array(5)].map((_, index) => (
-              <span key={index} className="text-[#FFAD33]">
-                {index < (product.rating) ? '★' : '☆'}
-              </span>
-            ))}
-            <span className="text-[0.8rem]">({product.review_customer_count})</span>
+          <span className="line-through text-gray-500">
+            ${product.actual_price}
           </span>
-        </div>
-      })}
+        </p>
+        <span className=" absolute bg-[#DB4444]  text-white px-4 py-1 top-8 left-4 rounded-sm">-{Math.round(product.discount)} {"%"}</span>
+        <span>
+          {[...Array(5)].map((_, index) => (
+            <span key={index} className="text-[#FFAD33]">
+              {index < (product.rating) ? '★' : '☆'}
+            </span>
+          ))}
+          <span className="text-[0.8rem]">({product.review_customer_count})</span>
+        </span>
+      </div>
+      )}
     </div>
   );
 }

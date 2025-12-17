@@ -17,6 +17,7 @@ interface ProductFormValues {
     favorite?: boolean;
     best_seller?: boolean;
     image: FileList | null;
+    description:string;
 }
 
 export default function ProductForm() {
@@ -48,6 +49,7 @@ export default function ProductForm() {
         // "review_customer_count",
         "discount_percentage",
         "category",
+        "description"
     ];
 
     const mandotoryField = ["name", "actual_price", "rating", "review_customer_count", "category",]
