@@ -1,13 +1,13 @@
 import { getProductsList } from "@/component/getProductsList";
-import { ImageSlider } from "@/utils/imageSlide";
 import Image from "next/image";
 import Link from "next/link";
+import ImageSlider from '@/utils/imageSlideServer';
 
 async function MainComponent() {
   const { data: productList } = await getProductsList();
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" >
       {productList && productList.map((product: any) => <div key={product.id} className="border-0 rounded-lg m-4 p-4 shadow-md flex flex-col items-center relative">
         {product && <ImageSlider product={product} />}
         <span>

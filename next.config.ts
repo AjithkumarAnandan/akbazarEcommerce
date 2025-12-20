@@ -5,16 +5,16 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '10mb',  // your new limit
     }
-  }
-//  async redirects() {
-//     return [
-//       {
-//         source: '/dashboard',
-//         destination: '/',
-//         permanent: true,
-//       },
-//     ]
-//   },
+  },
+ async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/dashboard',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 export default nextConfig;

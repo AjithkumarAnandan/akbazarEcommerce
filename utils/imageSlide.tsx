@@ -10,7 +10,7 @@ interface Props {
   product: Product;
 }
 
-export function ImageSlider({ product }: Props) {
+export default function ImageSlider({ product }: Props) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null); // client state
 
   useEffect(() => {
