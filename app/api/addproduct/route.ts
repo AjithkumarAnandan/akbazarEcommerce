@@ -1,4 +1,4 @@
-import { pool, postgresConnect } from "@/libs/db";
+import { pool, postgresConnect } from "@/utils/db";
 import ensureDB from "@/utils/ensure";
 import { NextResponse } from "next/server";
 
