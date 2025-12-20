@@ -1,5 +1,5 @@
-import { pool } from "./db";
-import { postgresConnect } from "@/utils/db";
+import { pool } from "../libs/db";
+import { postgresConnect } from "@/libs/db";
 
 
  const ensureExistDb = async () => {

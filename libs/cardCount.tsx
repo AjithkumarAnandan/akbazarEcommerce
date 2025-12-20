@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import { SelectedProductProps } from "./typescript"
+import { SelectedProductProps } from "../utils/typescript"
 
 function CardCounter({ product }: { product: SelectedProductProps }) {
     const [count, setCount] = useState(1)

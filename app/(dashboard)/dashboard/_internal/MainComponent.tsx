@@ -1,7 +1,7 @@
 import { getProductsList } from "@/component/getProductsList";
 import Image from "next/image";
 import Link from "next/link";
-import ImageSlider from '@/utils/imageSlideServer';
+import ImageSlider from '@/libs/imageSlideServer';
 
 async function MainComponent() {
   const { data: productList } = await getProductsList();

@@ -1,6 +1,6 @@
 import { getSelectProduct } from "@/component/getProductsList";
-import CardCounter from "@/utils/cardCount";
-import { SingleImageSLider } from "@/utils/imageSlide";
+import CardCounter from "@/libs/cardCount";
+import { SingleImageSLider } from "@/libs/imageSlide";
 import { SelectedProductProps } from "@/utils/typescript";
 import { notFound } from "next/navigation";
 

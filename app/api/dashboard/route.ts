@@ -1,5 +1,5 @@
 
-import { pool } from "@/utils/db";
+import { pool } from "@/libs/db";
 import ensureDB from "@/utils/ensure";
 import { NextResponse } from "next/server";
 
