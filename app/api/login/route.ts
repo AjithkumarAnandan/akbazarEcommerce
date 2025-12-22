@@ -1,39 +1,38 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+// import { serialize } from "cookie";
+import { cookies } from "next/headers";
 
-const SECRET = process.env.JWT_SECRET || "supersecret";
+const SECRET = process.env.JWT_SECRET ?? "supersecret";
 
 export const POST = async (req: Request) => {
   try {
-    // const body = await req.json();
-    // const { email, password } = body;
+    const payload = { role: "user" };
 
-    // TODO: Replace this with real user validation
-    // if (email !== "test@example.com" || password !== "123456") {
-    //   return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
-    // }
-
-    // Create JWT payload
-    // const payload = { email, role: "user" };
-    const payload = {  role: "user" };
-
-    // Sign token
+    // Sign JWT
     const token = jwt.sign(payload, SECRET, { expiresIn: "1h" });
-
-    // Set token as HttpOnly cookie
-    let response = NextResponse.json({ message: "Login successful" });
-    response.cookies.set({
+    const cookieStore = await cookies();
+    // Set JWT as HttpOnly cookie
+    cookieStore.set({
       name: "authToken",
       value: token,
-      httpOnly: true,       // 🔒 HttpOnly
+      httpOnly: true,
+      // secure: process.env.NODE_ENV === "production", // ✅ FIX
       secure: true,
-    //   process.env.NODE_ENV === "production", // only send over HTTPS in prod
-      maxAge: 60 * 60,      // 1 hour
-      path: "/",            // cookie valid for entire site
-      sameSite: "strict",
+      maxAge: 60 * 60, // 1 hour
+      path: "/",
+      sameSite: "lax", // ✅ safer default than "strict"
     });
+ 
+    // serialize("authToken", token, {
+    //   httpOnly: true,       // JS cannot access this cookie
+    //   secure: true,
+    //   sameSite: "strict",
+    //   maxAge: 60 * 60 * 24, // 1 day
+    //   path: "/",
+    // })
 
-    return response;
+    return NextResponse.json({ message: "Login successful" });
   } catch (error) {
     return NextResponse.json(
       { message: (error as Error).message },

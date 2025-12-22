@@ -1,10 +1,11 @@
 "use client"
 // react-form-hook is client side and also server side vbalidation is not posible that means cannot possible throw error in front end
-import axios from "axios";
+// import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { productSchema } from "./_internal/zodValidationAddProduct";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { fileToBinaryArray } from "@/utils/fileToBinaryArray";
+import api from "@/utils/apiInterceptors.client";
 
 interface ProductFormValues {
     name: string;
@@ -34,7 +35,7 @@ export default function ProductForm() {
             const validatedData = productSchema.parse(formData);
             const discount_price = (formData.actual_price ?? 0) * ((100 - Number(formData.discount_percentage ?? 0)) / 100);
             // You can now send formData to your API
-            const res = await axios.post("/api/addproduct", { ...formData, discount_price, image }, { headers: { "Content-Type": "multipart/form-data" } });
+            const res = await api.post("/api/addproduct", { ...formData, discount_price, image }, { headers: { "Content-Type": "multipart/form-data" } });
             console.log(res);
         } catch (error) {
             console.error("Validation failed:", error);
