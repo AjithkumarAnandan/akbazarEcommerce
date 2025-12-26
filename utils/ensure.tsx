@@ -46,5 +46,20 @@ import { postgresConnect } from "@/utils/db";
 );`)
 }
 
- const ensureDB={ensureExistDb,ensureProductImages,ensureProductListTable,ensureProductReviews,postgresConnect};
+
+ const ensureUserListTable=async()=>{
+    await pool.query(
+      `CREATE TABLE IF NOT EXISTS akstore.userlist (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE,
+  phone VARCHAR(20) UNIQUE,
+  role VARCHAR(50) DEFAULT 'user',
+  created_at TIMESTAMP DEFAULT NOW()
+);`);
+}
+
+ const ensureDB={ensureUserListTable,ensureExistDb,ensureProductImages,ensureProductListTable,ensureProductReviews,postgresConnect};
  export default ensureDB;
+

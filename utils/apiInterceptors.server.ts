@@ -9,6 +9,8 @@ api.interceptors.request.use(async (config) => {
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
+  }else{
+    console.log("No auth token found in cookies");    
   }
 
   return config;

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import { ToastContainer } from "react-toastify";
 // import { Geist, Geist_Mono } from "next/font/google";
 
 //Figma design dev mail 
@@ -37,6 +38,7 @@ export default function RootLayout({
         className={`antialiased ${poppins.className}`}
       >
         {children}
+         <ToastContainer />
       </body>
     </html>
   );

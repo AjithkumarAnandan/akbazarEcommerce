@@ -1,6 +1,6 @@
 import React from 'react'
 
-function page() {
+async function page() {
   return (
     <div className=" grid grid-cols-[1fr_1fr] grid-rows-2 gap-8 m-[10rem] ">
       <div className='col-span-1 row-span-2  shadow-lg p-8'>
