@@ -13,7 +13,7 @@ async function MainComponent() {
         <span>
           {product.favorite ?
             <Image className="absolute top-8 right-4 bg-white rounded-lg w-10 h-auto" src="/wishlist-favorite.svg" alt="No image" width={25} height={25} /> :
-            <Image className="absolute top-8 right-4 bg-white rounded-lg w-10 h-auto" src="/Wishlist.svg" alt="No image" width={25} height={25} />}
+            <Image className="absolute top-8 right-4 bg-white rounded-lg w-10 h-auto" src="/wishlist.svg" alt="No image" width={25} height={25} />}
         </span>
         <Link href={`/selected-product/${btoa(product.id)}`}>
           <h1 className="font-semibold text-lg text-center mb-2">{product.name.slice(0, 20)}...</h1>

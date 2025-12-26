@@ -1,9 +1,8 @@
 'use client'; // Make this a client-side component if using Next.js 13+
 
 import { LoginSchema } from '@/utils/zod.schema';
-// import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -13,6 +12,7 @@ import axios, { AxiosError } from 'axios';
 type LoginData = z.infer<typeof LoginSchema>;
 
 export default function LoginLink() {
+
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { register, formState: { errors }, handleSubmit } = useForm({
@@ -21,13 +21,10 @@ export default function LoginLink() {
 
     const handleLogin = async (data: LoginData) => {
         setLoading(true);
-        // console.log('Login data:', data);
         const encodedpassword = btoa(data.password);
         const payload = { ...data, password: encodedpassword };
         try {
             const res = await axios.post('/api/login', payload);
-            // console.log(res);
-            // console.log(res.data.message);
             toast.success(res.data.message);
             router.replace('/dashboard');
         } catch (err) {
@@ -35,7 +32,7 @@ export default function LoginLink() {
                 (err && (err as AxiosError).isAxiosError)
                     ? ((err as AxiosError)?.response?.data as Error)?.message
                     || (err as Error)?.message
-                    || 'Login failed':'Login failed'
+                    || 'Login failed' : 'Login failed'
             );
         } finally {
             setLoading(false);

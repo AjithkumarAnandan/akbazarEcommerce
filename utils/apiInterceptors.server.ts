@@ -1,7 +1,10 @@
 import axios from "axios";
 import { cookies } from "next/headers";
 
-const api = axios.create();
+const api = axios.create({
+  baseURL: process.env.ENVHOSTSITE??'http://localhost:3000/',
+  withCredentials: true,
+});
 
 api.interceptors.request.use(async (config) => {
   const cookieStore = await cookies();
