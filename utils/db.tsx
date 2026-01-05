@@ -11,10 +11,10 @@ dotenv.config();
 
 // app.use(express.json())
 
-const envhost = process.env.ENVHOSTSITE ?? "http://localhost:3000"
+// const envhost = process.env.ENVHOSTSITE ?? "http://localhost:3000"
 
 export const pool = new Pool({
-  connectionString: `postgres://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGUSER}`, 
+    connectionString: `postgres://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGUSER}`,
 });
 
 

@@ -1,13 +1,12 @@
 import { pool } from "./db";
 import { postgresConnect } from "@/utils/db";
 
-
- const ensureExistDb = async () => {
-    await pool.query(`CREATE SCHEMA IF NOT EXISTS akstore`);     
+const ensureExistDb = async () => {
+  await pool.query(`CREATE SCHEMA IF NOT EXISTS akstore`);
 };
 
- const ensureProductListTable=async()=>{
-    await pool.query(`CREATE TABLE IF NOT EXISTS akstore.productlist (
+const ensureProductListTable = async () => {
+  await pool.query(`CREATE TABLE IF NOT EXISTS akstore.productlist (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   actual_price NUMERIC(10,2),
@@ -21,10 +20,10 @@ import { postgresConnect } from "@/utils/db";
   created_at TIMESTAMP DEFAULT NOW()
 );`);
 }
-  // image TEXT[],
+// image TEXT[],
 
- const ensureProductImages=async()=>{
-    await pool.query(`CREATE TABLE IF NOT EXISTS akstore.productimagelist (
+const ensureProductImages = async () => {
+  await pool.query(`CREATE TABLE IF NOT EXISTS akstore.productimagelist (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   product_id INTEGER NOT NULL REFERENCES akstore.productlist(id) ON DELETE CASCADE,
@@ -33,9 +32,8 @@ import { postgresConnect } from "@/utils/db";
 );`)
 }
 
-
- const ensureProductReviews=async()=>{
-    await pool.query(`CREATE TABLE IF NOT EXISTS akstore.product_reviews (
+const ensureProductReviews = async () => {
+  await pool.query(`CREATE TABLE IF NOT EXISTS akstore.product_reviews (
   id SERIAL PRIMARY KEY,
   product_id INTEGER NOT NULL REFERENCES akstore.productlist(id) ON DELETE CASCADE,
   reviewer_name VARCHAR(255),
@@ -46,10 +44,9 @@ import { postgresConnect } from "@/utils/db";
 );`)
 }
 
-
- const ensureUserListTable=async()=>{
-    await pool.query(
-      `CREATE TABLE IF NOT EXISTS akstore.userlist (
+const ensureUserListTable = async () => {
+  await pool.query(
+    `CREATE TABLE IF NOT EXISTS akstore.userlist (
   id SERIAL PRIMARY KEY,
   username VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
@@ -60,6 +57,5 @@ import { postgresConnect } from "@/utils/db";
 );`);
 }
 
- const ensureDB={ensureUserListTable,ensureExistDb,ensureProductImages,ensureProductListTable,ensureProductReviews,postgresConnect};
- export default ensureDB;
-
+const ensureDB = { ensureUserListTable, ensureExistDb, ensureProductImages, ensureProductListTable, ensureProductReviews, postgresConnect };
+export default ensureDB;
