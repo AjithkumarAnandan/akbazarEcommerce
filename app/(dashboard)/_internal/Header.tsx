@@ -17,7 +17,7 @@ export default function Header({isLogout=false}: {isLogout?: boolean}) {
             </ul>
             <ul className='flex gap-4 space-x-4'>
                 <li className='flex relative'>
-                    <input type="text" className='border-0 bg-[#F5F5F5]  p-[0.21875rem_2rem_0.21875rem_0.625rem]' placeholder='What are you looking for?' />
+                    <input name='search' type="text" className='border-0 bg-[#F5F5F5]  p-[0.21875rem_2rem_0.21875rem_0.625rem]' placeholder='What are you looking for?' />
                     <Image className='absolute right-1 top-1' src="/search.svg" alt="No image" width={20} height={20} />
                 </li>
                 <li><Image className='max-w-10' src="/wishlist.svg" alt="No image" width={25} height={25} /></li>

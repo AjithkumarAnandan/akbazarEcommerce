@@ -30,7 +30,7 @@ export const POST = async (req: Request) => {
     cookieStore.set({
       name: "authToken",
       value: token,
-      secure: process.env.NODE_ENV === "production", // ✅ FIX
+      secure: true, // ✅ FIX
       httpOnly: true,      
       maxAge: 60 * 60, // 1 hour
       path: "/",

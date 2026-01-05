@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+const allowedOrigins = ["http://localhost:3000"];
+
 // This **must** be named `middleware`
 export function proxy(request: NextRequest) {
   // Example: redirect if not logged in
@@ -9,8 +11,15 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  // Continue the request
-  return NextResponse.next();
+  const origin = request.headers.get("origin");
+  const res = NextResponse.next();
+  if (origin && allowedOrigins.includes(origin)) {
+    res.headers.set("Access-Control-Allow-Origin", origin);
+  }
+
+  res.headers.set("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  return res
 }
 // Optional: configure which routes it applies to
 export const config = {

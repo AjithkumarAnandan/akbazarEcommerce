@@ -1,15 +1,15 @@
 
 
 
-import express from "express";
+// import express from "express";
 import dotenv from "dotenv"
-import cors from "cors";
+// import cors from "cors";
 import { Pool } from "pg";
 
 dotenv.config();
-const app = express();
+// const app = express();
 
-app.use(express.json())
+// app.use(express.json())
 
 const envhost = process.env.ENVHOSTSITE ?? "http://localhost:3000"
 
@@ -34,9 +34,9 @@ export const postgresConnect = async () => {
 
 
 // CORS middleware configuration
-const corsOptions = {
-    origin: envhost, // Replace with your frontend URL
-    methods: "GET,POST,PUT,DELETE,HEAD,PATCH", // Allowable methods
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: envhost, // Replace with your frontend URL
+//     methods: "GET,POST,PUT,DELETE,HEAD,PATCH", // Allowable methods
+// };
+// app.use(cors(corsOptions));
 

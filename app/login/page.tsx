@@ -1,39 +1,30 @@
 'use client'; // Make this a client-side component if using Next.js 13+
 
 import { LoginSchema } from '@/utils/zod.schema';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'react-toastify';
-import axios, { AxiosError } from 'axios';
+import { getLoginUser } from '@/component/Login_Logout';
 
-type LoginData = z.infer<typeof LoginSchema>;
+export type LoginData = z.infer<typeof LoginSchema>;
 
 export default function LoginLink() {
-
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
     const { register, formState: { errors }, handleSubmit } = useForm({
         resolver: zodResolver(LoginSchema)
     })
 
-    const handleLogin = async (data: LoginData) => {
+    const handleLogin = async (loginData: LoginData) => {
         setLoading(true);
-        const encodedpassword = btoa(data.password);
-        const payload = { ...data, password: encodedpassword };
         try {
-            const res = await axios.post('/api/login', payload);
-            toast.success(res.data.message);
-            router.replace('/dashboard');
+            const encodedPassword = btoa(loginData.password);
+            const payload = { ...loginData, password: encodedPassword };
+            await getLoginUser({ payload });       
         } catch (err) {
-            toast.error(
-                (err && (err as AxiosError).isAxiosError)
-                    ? ((err as AxiosError)?.response?.data as Error)?.message
-                    || (err as Error)?.message
-                    || 'Login failed' : 'Login failed'
-            );
+            toast.error("An unexpected error occurred");
+            console.error(err);
         } finally {
             setLoading(false);
         };
