@@ -1,7 +1,7 @@
+import dynamic from "next/dynamic";
 import React from "react";
-import { lazy } from "react";
-const Header = lazy(() => import("../(dashboard)/_internal/Header"))
-const Footer = lazy(() => import("../(dashboard)/_internal/Footer"))
+const Header = dynamic(() => import("../(dashboard)/_internal/Header"))
+const Footer = dynamic(() => import("../(dashboard)/_internal/Footer"))
 
 export default function RootLayout({
   children,

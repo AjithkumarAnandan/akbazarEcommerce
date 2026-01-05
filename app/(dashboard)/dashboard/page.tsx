@@ -1,9 +1,9 @@
 "use server"
-import { lazy } from "react"
 import  AdComponent  from "./_internal/AdComponent";
+import dynamic from "next/dynamic";
 
-const MainComponent = lazy(() => import("./_internal/MainComponent"))
-const Sidebar = lazy(() => import("./_internal/Sidebar"))
+const MainComponent = dynamic(() => import("./_internal/MainComponent"))
+const Sidebar = dynamic(() => import("./_internal/Sidebar"))
 
 export default async function Home() {
   return <div className="grid grid-cols-3 grid-rows-[auto_1fr] min-h-[100vh] mx-[4rem] ">
