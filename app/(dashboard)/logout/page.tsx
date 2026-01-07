@@ -8,7 +8,7 @@ export default function LogoutPage() {
   useLayoutEffect(() => {
     const logout = async () => {
       try {
-        await fetch("/api/logout", {
+        await fetch("/api/auth/logout", {
           method: "GET",
           cache: "no-store",
           credentials: "include",

@@ -1,6 +1,4 @@
 'use client'; // Make this a client-side component if using Next.js 13+
-
-import api from '@/utils/apiInterceptors.client';
 import { signupSchema } from '@/utils/zod.schema';
 // import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -10,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
+import { signUpApiProps } from '@/component/addProductsComponent';
 
 type SignUpData = z.infer<typeof signupSchema>;
 
@@ -25,7 +24,7 @@ export default function LoginLink() {
         const encodedpassword = btoa(data.password);
         const payload = { ...data, password: encodedpassword };
         try {
-            const res = await api.post('/api/signup', payload);
+            const res = await signUpApiProps({payload})
             // console.log(res.data.message);
             toast.success(res.data.message);
             router.push('/dashboard');

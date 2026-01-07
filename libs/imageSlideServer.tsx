@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { Fragment } from "react/jsx-runtime";
 
 interface Product {
   name: string;
@@ -21,17 +22,18 @@ export default function ImageSlider({ product }: Props) {
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="relative mb-2 ">
-        {product?.images?.[0] && <img
+    <Fragment>
+      {product?.images?.[0] && <div className="relative mb-2 ">
+        <img
           src={product.images[0]}
           alt={product.name}
           width={200}
           height={100}
-          className={`justify-end object-fill rounded-md`}
-        />}
+          className="justify-end object-fill rounded-md"
+        />
       </div>
-    </div>
+      }
+    </Fragment>
   );
 }
 

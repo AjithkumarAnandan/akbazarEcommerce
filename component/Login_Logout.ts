@@ -11,7 +11,7 @@ export async function getLoginUser({ payload }: { payload: LoginData })
 //  Promise<{ data: LoginUserResponse | null; error: AxiosError | Error | null }> 
 {
     try {
-        const res = await axios.post<LoginUserResponse>('/api/login', payload, {
+        const res = await axios.post<LoginUserResponse>('/api/auth/login', payload, {
             signal: AbortSignal.timeout(10000) // auto timeout after 10s
         });
         if (res?.data?.message) {
