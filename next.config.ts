@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/',
-        destination: '/ecommerce/dashboard',
+        destination: '/ecommerce',
         permanent: false, // you probably want this temporary redirect
       },
     ]
