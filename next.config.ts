@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   basePath: '/ecommerce',
-  assetPrefix: '/ecommerce',  
+  assetPrefix: '/ecommerce',
   productionBrowserSourceMaps: false,
   experimental: {
     serverActions: {

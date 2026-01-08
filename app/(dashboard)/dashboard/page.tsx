@@ -1,7 +1,7 @@
 "use server"
-import  AdComponent  from "./_internal/AdComponent";
-import  MainComponent  from "./_internal/MainComponent";
-import  Sidebar  from "./_internal/Sidebar";
+import AdComponent from "./_internal/AdComponent";
+import MainComponent from "./_internal/MainComponent";
+import Sidebar from "./_internal/Sidebar";
 
 export default async function Home() {
   return <div className="grid grid-cols-3 grid-rows-[auto_1fr] min-h-[100vh] mx-[4rem] ">
