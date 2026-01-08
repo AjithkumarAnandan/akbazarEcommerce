@@ -5,16 +5,17 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   experimental: {
     serverActions: {
-      bodySizeLimit: '10mb',  // your new limit
-    }
+      bodySizeLimit: '10mb',
+    },
   },
-    async rewrites() {
-    return [      
-       {
+  async redirects() {
+    return [
+      {
         source: '/',
-        destination: '/dashboard',
-        },
-    ]
+        destination: '/ecommerce/dashboard', // redirect root domain to dashboard
+        permanent: true,
+      },
+    ];
   },
 };
 
