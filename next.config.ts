@@ -9,19 +9,18 @@ const nextConfig: NextConfig = {
       bodySizeLimit: '10mb',  // your new limit
     }
   },
-    async redirects() {
+    async rewrites() {
     return [
       
       {
         source: '/ecommerce',
         destination: '/ecommerce/dashboard',
-        permanent: false, // you probably want this temporary redirect
+       
       },
       {
         source: '/',
         destination: '/ecommerce',
-        permanent: false, // you probably want this temporary redirect
-      },
+        },
     ]
   },
 };
