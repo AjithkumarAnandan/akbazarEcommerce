@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/',
-        destination: '/ecommerce/dashboard', // redirect root domain to dashboard
+        destination: '/dashboard', // redirect root domain to dashboard
         permanent: true,
       },
     ];
