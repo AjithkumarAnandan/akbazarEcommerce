@@ -13,8 +13,8 @@ dotenv.config();
 
 // const envhost = process.env.ENVHOSTSITE ?? "http://localhost:3000"
 
-export const pool = new Pool({
-    connectionString: `postgres://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGUSER}`,
+export const pool = new Pool({   
+    connectionString: process.env.DATABASE_URL || `${process.env.PG}://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGUSER}`,
 });
 
 
