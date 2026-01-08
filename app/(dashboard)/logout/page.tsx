@@ -1,6 +1,7 @@
 'use client';
 import { useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
+import { authLogout, loginPath } from "@/utils/api.path";
 
 export default function LogoutPage() {
   const router = useRouter();
@@ -8,12 +9,12 @@ export default function LogoutPage() {
   useLayoutEffect(() => {
     const logout = async () => {
       try {
-        await fetch("/api/auth/logout", {
+        await fetch(authLogout, {
           method: "GET",
           cache: "no-store",
           credentials: "include",
         });
-        router.replace("/login");
+        router.replace(loginPath);
       } catch (error) {
         console.error("Logout failed:", error);
       }

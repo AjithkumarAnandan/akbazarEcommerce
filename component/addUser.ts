@@ -1,11 +1,10 @@
 "use server"
-
-import { addProductApi } from "@/utils/api.path";
+import { authSignupApi } from "@/utils/api.path";
 import api from "@/utils/apiInterceptors.server";
 
-export const addProductProps = async (formData: any) => {
+export const signUpApiProps = async (formData: any) => {
     try {
-        const response = await api.post(addProductApi, formData);
+        const response = await api.post(authSignupApi, formData)
         return response.data;
     } catch (error: any) {
         if (error.response) {
@@ -17,5 +16,3 @@ export const addProductProps = async (formData: any) => {
         throw error
     }
 }
-// { headers: { "Content-Type": "multipart/form-data" } }
-

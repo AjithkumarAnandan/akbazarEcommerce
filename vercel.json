@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/ecommerce/:path*",
+      "destination": "https://ecommerce.vercel.app/:path*"
+    }
+  ]
+}

@@ -1,14 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    productionBrowserSourceMaps: false,
+  basePath: '/ecommerce',
+  assetPrefix: '/ecommerce',
+  productionBrowserSourceMaps: false,
   // basePath: '/store',
-     experimental: {
+  experimental: {
     serverActions: {
       bodySizeLimit: '10mb',  // your new limit
     }
   },
- async redirects() {
+  async redirects() {
     return [
       {
         source: '/',
@@ -17,6 +19,7 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+
 };
 
 export default nextConfig;

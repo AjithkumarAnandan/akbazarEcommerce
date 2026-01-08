@@ -1,8 +1,9 @@
+import { dashboardApi, productIdApi } from "@/utils/api.path";
 import api from "@/utils/apiInterceptors.server";
 
 export async function getProductsList() {
     try {
-        const res = await api.get("api/dashboard");
+        const res = await api.get(dashboardApi);
         return await res.data;
     } catch (error) {
         console.log("Server error:", (error as Error).message);
@@ -12,7 +13,7 @@ export async function getProductsList() {
 
 export async function getSelectProduct(id: Number | string) {
     try {
-        const res = await api.get(`api/${id}`);
+        const res = await api.get(`${productIdApi}/${id}`);
         return res.data;
     } catch (error) {
         console.log("Server error:", (error as Error).message);

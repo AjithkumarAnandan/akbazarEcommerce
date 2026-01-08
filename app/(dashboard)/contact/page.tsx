@@ -1,3 +1,4 @@
+import { mailIconImage, phoneIconImage } from '@/utils/api.path'
 import React from 'react'
 
 async function page() {
@@ -7,7 +8,7 @@ async function page() {
         {/* Call section */}
       <div className=" flex flex-col space-y-4">
         <div className="flex gap-4 w-40 items-center">
-          <img src="/icons-phone.svg" alt="No call" />
+          <img src={phoneIconImage} alt="No call" />
           <span>Call To Us</span>
         </div>
         <p>We are available 24/7, 7 days a week.</p>
@@ -17,7 +18,7 @@ async function page() {
       {/* Write section */}
       <div className="flex flex-col space-y-4">
         <div className="flex gap-4 w-40 items-center">
-          <img src="/icons-mail.svg" alt="No write" />
+          <img src={mailIconImage} alt="No write" />
           <span>Write To Us</span>
         </div>
         <p>Fill out our form and we will contact you within 24 hours.</p>

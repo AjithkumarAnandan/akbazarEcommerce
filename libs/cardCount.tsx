@@ -3,10 +3,10 @@
 import Image from "next/image"
 import { useState } from "react"
 import { SelectedProductProps } from "../utils/typescript"
+import { wishlistFavImage, wishlistImage } from "@/utils/api.path"
 
 function CardCounter({ product }: { product: SelectedProductProps }) {
     const [count, setCount] = useState(1)
-
     return <div className="flex ">
         <div className="w-40 flex border border-black/30 rounded-sm">
             <button className="px-4 py-2 bg-red " onClick={() => setCount(prev => prev - 1)} disabled={count < 1}>-</button>
@@ -18,11 +18,8 @@ function CardCounter({ product }: { product: SelectedProductProps }) {
         <span className="border border-black/30 p-1 ml-4 rounded-sm">
             <Image
                 className="w-8 h-8"
-                src={
-                    product.favorite
-                        ? "/wishlist-favorite.svg"
-                        : "/Wishlist.svg"
-                }
+                src={product.favorite
+                        ?`${wishlistFavImage}`:`${wishlistImage}`}
                 alt="Wishlist"
                 width={25}
                 height={25}

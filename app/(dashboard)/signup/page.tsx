@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
-import { signUpApiProps } from '@/component/addProductsComponent';
+import { signUpApiProps } from '@/component/addUser';
 
 type SignUpData = z.infer<typeof signupSchema>;
 
@@ -22,13 +22,15 @@ export default function LoginLink() {
     const handleSignUp = async (data: SignUpData) => {
         setLoading(true);
         const encodedpassword = btoa(data.password);
-        const payload = { ...data, password: encodedpassword };
+        const formData = { ...data, password: encodedpassword };
+        console.log("payload",formData)
         try {
-            const res = await signUpApiProps({payload})
-            // console.log(res.data.message);
-            toast.success(res.data.message);
-            router.push('/dashboard');
-        } catch (err) {           
+            const res = await signUpApiProps(formData)
+            console.log("API response:", res);
+            toast.success(res?.message??"User created Successfully");
+            // router.push(dashboardClientPath);
+        } catch (err) {  
+            // console.log("err",err?.message)         
             toast.error(
                 (err as Error)?.message ||
                 'Login failed'

@@ -4,7 +4,7 @@ import { refreshTokenApi } from "./refresh";
 import { redirect } from "next/navigation";
 
 const api = axios.create({
-  baseURL: process.env.ENVHOSTSITE ?? 'http://localhost:3000/',
+  baseURL: process.env.ENVHOSTSITE ?? 'http://localhost:3000',
   withCredentials: true,
 });
 
@@ -16,27 +16,25 @@ api.interceptors.request.use(async (config) => {
   } else {
     redirect("/login");
   }
-
   return config;
 });
 
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
-    error.config._retry = true;
     if (error.response?.status === 401) {
+      error.config._retry = true;
       // Handle unauthorized server-side (maybe throw an error)
       const cookieStore = await cookies();
       const refreshToken = cookieStore.get("refreshToken")?.value as string;
       if (refreshToken) {
-        refreshTokenApi()
-      } else {
-        redirect("/login");
+        refreshTokenApi();
+        return api(error.config); 
       }
       console.log("No auth token found incookies");
-      redirect("/login");
-    }
-    throw new Error("Unauthorized");
+      }
+    // throw new Error("Unauthorized");
+      return Promise.reject(error);
   }
 );
 

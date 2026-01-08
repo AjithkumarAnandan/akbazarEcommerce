@@ -1,4 +1,5 @@
 import { LoginData } from "@/app/login/page";
+import { authLogin,dashboardPath } from "@/utils/api.path";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -11,11 +12,11 @@ export async function getLoginUser({ payload }: { payload: LoginData })
 //  Promise<{ data: LoginUserResponse | null; error: AxiosError | Error | null }> 
 {
     try {
-        const res = await axios.post<LoginUserResponse>('/api/auth/login', payload, {
+        const res = await axios.post<LoginUserResponse>(authLogin, payload, {
             signal: AbortSignal.timeout(10000) // auto timeout after 10s
         });
         if (res?.data?.message) {
-            window.location.href = "/dashboard";
+            window.location.href = `${dashboardPath}`;
             toast.success(res?.data?.message);
         }
         return;
