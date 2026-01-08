@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  basePath: '/ecommerce',
-  assetPrefix: '/ecommerce',
+  // basePath: '/ecommerce',
+  // assetPrefix: '/ecommerce',
   productionBrowserSourceMaps: false,
   // basePath: '/store',
   experimental: {
@@ -10,12 +10,17 @@ const nextConfig: NextConfig = {
       bodySizeLimit: '10mb',  // your new limit
     }
   },
-  async redirects() {
+    async redirects() {
     return [
       {
         source: '/',
         destination: '/ecommerce/dashboard',
-        permanent: true,
+        permanent: true, // you probably want this temporary redirect
+      },
+      {
+        source: '/ecommerce',
+        destination: '/ecommerce/dashboard',
+        permanent: true, // you probably want this temporary redirect
       },
     ]
   },
