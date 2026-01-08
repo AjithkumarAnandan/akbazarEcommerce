@@ -9,9 +9,12 @@ const ACCESS_SECRET = process.env.JWT_SECRET ?? "supersecret";
 export function proxy(request: NextRequest) {
   // Example: redirect if not logged in
   const token: string | null = request.cookies.get('authToken')?.value ?? null;
+   if (!token && !request.nextUrl.pathname.includes("/ecommerce")) {
+    return NextResponse.redirect(new URL("/ecommerce/dashboard", request.url));
+  }
   if (!token && request.nextUrl.pathname.startsWith("/ecommerce/dashboard")) {
     return NextResponse.redirect(new URL("/ecommerce/login", request.url));
-  }
+  } 
 
   try {
     // ✅ Verify access token
