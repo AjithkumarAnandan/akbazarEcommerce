@@ -11,15 +11,16 @@ const nextConfig: NextConfig = {
   },
     async redirects() {
     return [
-      {
-        source: '/',
-        destination: '/ecommerce/dashboard',
-        permanent: true, // you probably want this temporary redirect
-      },
+      
       {
         source: '/ecommerce',
         destination: '/ecommerce/dashboard',
-        permanent: true, // you probably want this temporary redirect
+        permanent: false, // you probably want this temporary redirect
+      },
+      {
+        source: '/',
+        destination: '/ecommerce/dashboard',
+        permanent: false, // you probably want this temporary redirect
       },
     ]
   },
