@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
       bodySizeLimit: '10mb',  // your new limit
     }
   },
+  async rewrites() {
+    return [{
+      source: '/',
+      destination: '/ecommerce'
+    }]
+  },
   async redirects() {
     return [
       {
@@ -19,7 +25,6 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-
 };
 
 export default nextConfig;
