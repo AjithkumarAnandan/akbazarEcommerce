@@ -1,7 +1,3 @@
-"use client";
-import Image from "next/image";
-import { Fragment } from "react/jsx-runtime";
-
 interface Product {
   name: string;
   images?: string[];
@@ -13,7 +9,7 @@ interface Props {
 
 export default function ImageSlider({ product }: Props) {
 
-  if (!product.images || product.images.length === 0) {
+  if (!product?.images || product.images?.length === 0) {
     return (
       <div className="w-auto flex items-center justify-center bg-[#F5F5F5] text-gray-600 rounded-md mb-4">
         No Image
@@ -22,7 +18,7 @@ export default function ImageSlider({ product }: Props) {
   }
 
   return (
-    <Fragment>
+    <>
       {product?.images?.[0] && <div className="relative mb-2 ">
         <img
           src={product.images[0]}
@@ -33,7 +29,7 @@ export default function ImageSlider({ product }: Props) {
         />
       </div>
       }
-    </Fragment>
+    </>
   );
 }
 

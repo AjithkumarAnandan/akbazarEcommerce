@@ -1,7 +1,9 @@
-"use server"
+
+import { Suspense } from "react";
 import AdComponent from "./_internal/AdComponent";
 import MainComponent from "./_internal/MainComponent";
 import Sidebar from "./_internal/Sidebar";
+import Spinner from "@/utils/spinner";
 
 export default async function Home() {
   return <div className="grid grid-cols-3 grid-rows-[auto_1fr] min-h-[100vh] mx-[4rem] ">
@@ -14,7 +16,9 @@ export default async function Home() {
       <AdComponent />
     </div>
     <div className="col-span-3">
-      <MainComponent />
+      <Suspense fallback={<Spinner/>}>
+        <MainComponent />
+      </Suspense>
     </div>
   </div>
 }

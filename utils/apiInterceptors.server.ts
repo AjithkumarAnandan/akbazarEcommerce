@@ -1,10 +1,11 @@
+import React from 'react';
 import axios from "axios";
 import { cookies } from "next/headers";
 import { refreshTokenApi } from "./refresh";
 import { redirect } from "next/navigation";
 
 const api = axios.create({
-  baseURL: process.env.ENVHOSTSITE ?? 'http://localhost:3000',
+  baseURL: process.env.ENVHOSTSITE || 'http://localhost:3000',
   withCredentials: true,
 });
 
@@ -13,10 +14,10 @@ api.interceptors.request.use(async (config) => {
   const token = cookieStore.get("authToken")?.value;
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
+    return config;
   } else {
     redirect("/login");
   }
-  return config;
 });
 
 api.interceptors.response.use(
