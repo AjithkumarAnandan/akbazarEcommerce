@@ -16,6 +16,7 @@ const ensureProductListTable = async () => {
   favorite BOOLEAN DEFAULT FALSE,
   discount NUMERIC(5,2),
   category VARCHAR(255),
+  description VARCHAR(500), 
   best_seller BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT NOW()
 );`);
