@@ -43,6 +43,7 @@ function AddProductForm() {
                 image.push(byteArray as string);
             }
             const formData = { ...values, image }
+            console.log("formData", formData);
             const res = await addProductProps(formData)
             console.log("res", res);
         } catch (error) {

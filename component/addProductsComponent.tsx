@@ -6,6 +6,7 @@ import api from "@/utils/apiInterceptors.server";
 export const addProductProps = async (formData: any) => {
     try {
         const response = await api.post(addProductApi, formData);
+        console.log("response_ 9", response);
         return response.data;
     } catch (error: any) {
         if (error.response) {
