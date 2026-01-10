@@ -1,6 +1,5 @@
-import { cartImage, contactPath, defaultPath, logoutPath, signupPath, svgSearchImage, wishlistImage } from '@/utils/api.path'
-import Image from 'next/image'
-import Link from 'next/link'
+import { cartImage, contactPath, defaultPath, logoutPath, signupPath, svgSearchImage, wishlistImage } from '@/utils/api.path';
+import Link from 'next/link';
 
 export default function Header({isLogout=false}: {isLogout?: boolean}) {
     return (
@@ -19,10 +18,10 @@ export default function Header({isLogout=false}: {isLogout?: boolean}) {
             <ul className='flex gap-4 space-x-4'>
                 <li className='flex relative'>
                     <input name='search' type="text" className='border-0 bg-[#F5F5F5]  p-[0.21875rem_2rem_0.21875rem_0.625rem]' placeholder='What are you looking for?' />
-                    <Image className='absolute right-1 top-1' src={svgSearchImage} alt="No image" width={20} height={20} loading="eager" priority />
+                    <img className='absolute right-1 top-1' src={svgSearchImage} alt="No image" width={20} height={20} loading="eager" />
                 </li>
-                <li><Image className='max-w-10' src={wishlistImage} alt="No image" width={25} height={25} loading="eager" priority /></li>
-                <li><Image className='max-w-10' src={cartImage} alt="No image" width={25} height={25} loading="eager" priority /></li>
+                <li><img className='max-w-10' src={wishlistImage} alt="No image" width={25} height={25} loading="eager" /></li>
+                <li><img className='max-w-10' src={cartImage} alt="No image" width={25} height={25} loading="eager"  /></li>
                 <li>{!isLogout && <Link href={logoutPath}>Logout</Link>}</li>
             </ul>
         </div>
