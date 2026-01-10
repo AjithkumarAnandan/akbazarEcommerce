@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import jwt from "jsonwebtoken";
+import { dashboardPath, loginEcommercePath } from './utils/api.path';
 
 const allowedOrigins = ["http://localhost:3000"];
 const ACCESS_SECRET = process.env.JWT_SECRET ?? "supersecret";
@@ -10,8 +11,8 @@ export function proxy(request: NextRequest) {
   // Example: redirect if not logged in
   const token: string | null = request.cookies.get('authToken')?.value ?? null;
 
-  if (!token && request.nextUrl.pathname.startsWith("/ecommerce/dashboard")) {
-    return NextResponse.redirect(new URL("/ecommerce/login", request.url));
+  if (!token && request.nextUrl.pathname.startsWith(dashboardPath)) {
+    return NextResponse.redirect(new URL(loginEcommercePath, request.url));
   } 
 
   try {
@@ -29,7 +30,7 @@ export function proxy(request: NextRequest) {
     return res
   } catch (err) {
     // ❌ Expired / invalid access token
-    return NextResponse.redirect(new URL("/ecommerce/login", request.url));
+    return NextResponse.redirect(new URL(loginEcommercePath, request.url));
   }
 }
 // Optional: configure which routes it applies to

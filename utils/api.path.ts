@@ -4,6 +4,7 @@
 // export const contactPath="/contact";
 // export const logoutPath="/logout";
 // export const loginPath="/login";
+// export const loginEcommercePath="/ecommerce/login";
 // export const dashboardClientPath="/dashboard";
 // export const dashboardPath="/ecommerce/dashboard";
 
@@ -32,6 +33,7 @@ export const signupPath="/signup";
 export const contactPath="/contact";
 export const logoutPath="/logout";
 export const loginPath="/login";
+export const loginEcommercePath="/login";
 export const dashboardClientPath="/dashboard";
 export const dashboardPath="/dashboard";
 
