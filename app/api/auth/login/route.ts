@@ -13,7 +13,12 @@ export const POST = async (req: Request) => {
   const { username, password } = await req.json();
 
   try {
+    await ensureDB.postgresConnect()
+    await ensureDB.ensureExistDb()
     await ensureDB.ensureUserListTable()
+    await ensureDB.ensureProductListTable()
+    await ensureDB.ensureProductImages()
+    await ensureDB.ensureProductReviews()
     const existingUser = await pool.query(
       "SELECT * FROM akstore.userlist WHERE phone = $1 OR email = $1",
       [username])
