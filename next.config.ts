@@ -5,11 +5,11 @@ const nextConfig: NextConfig = {
   // assetPrefix: "/ecommerce",
   productionBrowserSourceMaps: false,
 
-  // experimental: {
-  //   serverActions: {
-  //     bodySizeLimit: "10mb",
-  //   },
-  // },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
+  },
 
   async redirects() {
     return [
