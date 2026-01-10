@@ -4,6 +4,7 @@ import api from "@/utils/apiInterceptors.server";
 export async function getProductsList() {
     try {
         const res = await api.get(dashboardApi);
+        console.log("res, res",res)
         return await res.data;
     } catch (error) {
         console.log("Server error:", (error as Error).message);
