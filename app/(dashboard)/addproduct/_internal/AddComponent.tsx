@@ -42,10 +42,9 @@ function AddProductForm() {
                 const byteArray = await fileToBinaryArray(file);
                 image.push(byteArray as string);
             }
-            const formData = { ...values, image }
-            console.log("formData", formData);
-            const res = await addProductProps(formData)
-            console.log("res", res);
+            const formData = { ...values, image, discount_price, discount: discountPercentage };
+            const res = await addProductProps(formData);
+            // console.log("res", res);
         } catch (error) {
             console.error("Validation failed:", error);
         }
