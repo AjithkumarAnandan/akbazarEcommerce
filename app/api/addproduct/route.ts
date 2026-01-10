@@ -36,7 +36,7 @@ export const POST = async (req: NextRequest) => {
             [product_id, name, image]
         );
         if (true) {
-        const res = await pool.query(`SELECT * FROM akstore.productlist`)
+        // const res = await pool.query(`SELECT * FROM akstore.productlist`)
         return NextResponse.json({
             data: {               
                 ...productResult.rows[0],
