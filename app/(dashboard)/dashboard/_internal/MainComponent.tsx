@@ -6,7 +6,7 @@ import { wishlistFavImage, wishlistImage } from "@/utils/api.path";
 
 async function MainComponent() {
   const { data: productList } = await getProductsList();
-  console.log("productList",productList)
+  // console.log("productList",productList)
    return (
     <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" >
        {Array.isArray(productList) && productList.length > 0 && productList.map((product: any) => {
