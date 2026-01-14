@@ -48,10 +48,10 @@ export const addProductApi="/api/addproduct";
 
 
 //Images
-export const svgSearchImage="/search.svg";
-export const wishlistImage="/wishlist.svg";
-export const wishlistFavImage="/wishlist-favorite.svg";
-export const frameImage="/frame.svg";
-export const cartImage="/cart.svg";
+export const svgSearchImage="/icons-search.svg";
+export const wishlistImage="/icons-wishlist.svg";
+export const wishlistFavImage="/icons-wishlist-favorite.svg";
+export const frameImage="/icons-frame.svg";
+export const cartImage="/icons-cart.svg";
 export const phoneIconImage="/icons-phone.svg";
 export const mailIconImage="/icons-mail.svg";
