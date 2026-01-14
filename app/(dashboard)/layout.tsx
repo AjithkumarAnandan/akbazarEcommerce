@@ -12,7 +12,9 @@ export default function RootLayout({
     <div className='grid grid-cols-[5rem_1fr_10rem] place-items-center grid-rows-[auto] bg-black text-white h-[3rem]'>
       <span></span>
       <p className='flex justify-center items-center h-[2rem] text-[0.75rem]'>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <span>ShopNow</span></p>
-      <select name="lang" id="lang" className='flex justify-end w-32'>
+      <label htmlFor="lang" className="sr-only">
+        Select language
+      </label><select name="lang" id="lang" className='flex justify-end w-32'>
         <option value="en">English</option>
       </select>
     </div>
