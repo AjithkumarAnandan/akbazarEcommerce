@@ -20,6 +20,19 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async headers() {
+  return [
+    {
+      source: '/dashboard',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=60, s-maxage=60, stale-while-revalidate=30'
+        }
+      ]
+    }
+  ];
+}
 };
 
 export default nextConfig;
